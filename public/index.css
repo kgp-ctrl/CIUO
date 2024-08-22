@@ -1,0 +1,127 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Sayfa taşmasını engelle */
+    user-select: none; /* Yazı seçimini engelle */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none; /* Mobilde dokunma seçeneklerini kaldır */
+}
+
+/* Haritayı tam ekran yapacak kapsayıcı */
+#world-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 0; /* Harita en altta kalmalı */
+}
+
+/* Haritanın tam ekran ve hareket edebilir olması */
+#world-map {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Haritanın kapsayıcıya tam oturması */
+    cursor: grab;
+    transition: transform 0.3s ease; /* Dönüşümlere yumuşak geçiş */
+    pointer-events: all; /* Haritayla etkileşim */
+}
+
+path {
+    fill: #cccccc;
+    stroke: #ffffff;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+path:hover {
+    fill: #4CAF50;
+}
+
+/* Liderlik tablosu ayarları */
+#leaderboard {  
+    position: absolute;
+    top: 10px;  
+    left: 10px;  
+    background-color: #5885af;  
+    padding: 10px;  
+    border: 1px solid #274472;  
+    max-width: 180px;  
+    max-height: 1200px;  
+    overflow-y: auto;  
+    z-index: 1; /* Lider tablosu haritanın üstünde kalmalı */
+    scrollbar-width: thin; /* Firefox için ince kaydırma çubuğu */  
+    scrollbar-color: #274472 #5885af; /* Firefox için kaydırma çubuğu rengi */
+    transition: background-position 0.1s ease; /* Arka planın fare hareketiyle hareket etmesi */
+}
+
+/* Chrome ve diğer WebKit tabanlı tarayıcılar için kaydırma çubuğu stilleri */  
+#leaderboard::-webkit-scrollbar {  
+    width: 8px; /* Kaydırma çubuğunun genişliği */  
+}  
+
+#leaderboard::-webkit-scrollbar-track {  
+    background: #5885af; /* Kaydırma çubuğu arka planı */  
+}  
+
+#leaderboard::-webkit-scrollbar-thumb {  
+    background-color: #274472; /* Kaydırma çubuğu */  
+    border-radius: 10px; /* Yuvarlatılmış köşeler */  
+}  
+
+#leaderboard::-webkit-scrollbar-thumb:hover {  
+    background-color: #21658c; /* Üzerine gelince rengi değiştir */  
+}
+
+#leaderboard h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+#leaderboard ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.maiden-orange-regular {
+    font-family: "Maiden Orange", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Liste elemanları için stil */
+#leaderboard li {
+    margin-bottom: 5px;
+    color: #edf2f3;
+    font-weight: 100;
+    font-style: normal;
+    font-family: "Maiden Orange", serif;
+}
+
+/* Bayrak simgeleri */
+.flag-icon {
+    width: 25px; 
+    height: auto;
+}
+
+/* Video arka planı ayarlama */
+
+#leaderboard {
+    width: 300px;
+    height: 900px;
+    background-image: url('den.jpeg'); /* Arka plan görseliniz */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow-y: auto;
+    position: relative; /* Eğer tabloyu sabit bir yerde tutmak istiyorsanız */
+}
