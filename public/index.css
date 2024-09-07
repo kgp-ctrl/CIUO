@@ -37,8 +37,8 @@ html, body {
 #world-map {
     top: 0;
     left: 0;
-    width: initial;
-    height: initial;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     cursor: grab;
     transition: transform 0.3s ease;
@@ -63,10 +63,7 @@ path:hover {
     position: absolute;
     top: 45px;
     left: 5px;
-    background-image: url('den.png'); /* Arka plan görseliniz */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: #464646;
     padding: 10px;
     max-width: 250px;
     max-height: 450px;
@@ -151,7 +148,7 @@ path:hover {
 
 /* Liderlik Tablosu için Kaydırma Çubuğu Stili */
 #leaderboard-container::-webkit-scrollbar {
-    width: 4px;
+    width: 0px;
     border-radius: 25px;
 }
 
