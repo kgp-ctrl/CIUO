@@ -8,11 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Maiden+Orange&display=swap" rel="stylesheet">
-    <script src="server.js"></script>
+   
 </head>
 <body>
+   <div id="hamburger-menu" class="hamburger">
+      <img src="leaderboard-logo.png"></img>
+  </div>
+  <div id="leaderboard-title" class="ldtitle">Leaderboard</div>
 
-    <div id="leaderboard">
+  <div id="leaderboard-container" class="leaderboard">
         <ul id="leaderboard-list">
             <!-- Dinamik olarak güncellenecek -->
         </ul>
@@ -1082,59 +1086,6 @@
             });
         });
 
-// Ülke isimlerini SVG üzerinde otomatik ekle
-document.querySelectorAll('#world-map path').forEach(country => {
-    const countryName = country.getAttribute('title'); // Ülke adını title attribute'dan al
-    const bbox = country.getBBox(); // Ülkenin sınır kutusunu al
-
-    // Ülkenin boyutlarına göre font büyüklüğünü hesapla
-    const scaleFactor = Math.min(bbox.width, bbox.height) / 10;
-    const fontSize = Math.max(scaleFactor, 5); // Minimum font boyutunu 5px olarak ayarla
-
-    // Ülke ismini SVG'ye ekle
-    const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    textElement.setAttribute("x", bbox.x + bbox.width / 2); // Ortalanmış X pozisyonu
-    textElement.setAttribute("y", bbox.y + bbox.height / 2); // Ortalanmış Y pozisyonu
-    textElement.setAttribute("class", "country-label");
-    textElement.setAttribute("text-anchor", "middle"); // Metni ortalamak için
-    textElement.setAttribute("alignment-baseline", "middle"); // Y ekseninde ortalama
-    textElement.setAttribute("font-size", `${fontSize}px`); // Dinamik olarak ayarlanmış font büyüklüğü
-    textElement.textContent = countryName;
-
-    // SVG'ye ekle
-    document.getElementById('world-map').appendChild(textElement);
-});
-
-
-        // Liderlik tablosunu güncelleme fonksiyonu
-        function updateLeaderboard() {
-            fetch('/leaderboard')
-                .then(response => response.json())
-                .then(data => {
-                    const leaderboardList = document.getElementById('leaderboard-list');
-                    leaderboardList.innerHTML = ''; // Önceki veriyi temizle
-                    
-                    data.forEach(item => {
-                        const li = document.createElement('li');
-                        
-                        // Bayrak SVG dosyasının yolunu oluşturun
-                        const flagPath = `flags/${item.country.toLowerCase()}.svg`;
-
-                        li.innerHTML = `<img src="${flagPath}" alt="${item.country} flag" class="flag-icon">
-                        ${item.country}: ${item.total_clicks}`;
-                        
-                        leaderboardList.appendChild(li);
-                    });
-                })
-                .catch((error) => console.error('Liderlik tablosu güncellenemedi:', error));
-        }
-
-        // Sayfa yüklendiğinde liderlik tablosunu güncelle
-        updateLeaderboard();
-
-        // Her 50 saniyede bir liderlik tablosunu güncelle
-        setInterval(updateLeaderboard, 50000);
-
         // Fare hareketiyle arka planı hareket ettirme
         document.querySelector('#leaderboard').addEventListener('mousemove', function(e) {
             const element = this;
@@ -1147,34 +1098,10 @@ document.querySelectorAll('#world-map path').forEach(country => {
 
             element.style.backgroundPosition = `${moveX}% ${moveY}%`;
         });
-        const map = document.getElementById('world-map');
-let isPanning = false, startX, startY, startTransform;
-
-map.addEventListener('mousedown', function(e) {
-    isPanning = true;
-    startX = e.clientX;
-    startY = e.clientY;
-    startTransform = map.style.transform.replace(/[^\d.,-]/g, '').split(',');
-});
-
-map.addEventListener('mousemove', function(e) {
-    if (!isPanning) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    map.style.transform = `translate(${dx}px, ${dy}px)`;
-});
-
-map.addEventListener('mouseup', function() {
-    isPanning = false;
-});
-
-map.addEventListener('wheel', function(e) {
-    e.preventDefault();
-    const scale = Math.max(0.1, Math.min(2, (1 + e.deltaY * -0.01)));
-    map.style.transform = `scale(${scale})`;
-});
-
+        
     </script>
-
+    <script src="map-zoom.js"></script>
+    <script src="country-map_name.js"></script>
+    <script src="leaderThree.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ let db = new sqlite3.Database('./clicker.db', (err) => {
     console.log('Connected to the SQLite database.');
 });
 
+
 // 'countries' tablosunu oluşturma
 db.run(`CREATE TABLE IF NOT EXISTS countries (
     id TEXT PRIMARY KEY,

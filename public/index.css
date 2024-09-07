@@ -1,40 +1,51 @@
+/* Genel sayfa stilleri */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Sayfa taşmasını engelle */
-    user-select: none; /* Yazı seçimini engelle */
+    overflow: hidden;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    -webkit-touch-callout: none; /* Mobilde dokunma seçeneklerini kaldır */
+    -webkit-touch-callout: none;
 }
 
-/* Haritayı tam ekran yapacak kapsayıcı */
+/* Ülke İsimleri */
+.country-label {
+    fill: black;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Harita Kapsayıcı Stilleri */
 #world-map-container {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    z-index: 0; /* Harita en altta kalmalı */
+    z-index: 0;
 }
 
-/* Haritanın tam ekran ve hareket edebilir olması */
+/* Harita SVG Stilleri */
 #world-map {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover; /* Haritanın kapsayıcıya tam oturması */
+    top: 0;
+    left: 0;
+    width: initial;
+    height: initial;
+    object-fit: cover;
     cursor: grab;
-    transition: transform 0.3s ease; /* Dönüşümlere yumuşak geçiş */
-    pointer-events: all; /* Haritayla etkileşim */
+    transition: transform 0.3s ease;
+    pointer-events: all;
 }
 
+/* Harita Ülke Path Stilleri */
 path {
     fill: #cccccc;
     stroke: #ffffff;
@@ -47,73 +58,114 @@ path:hover {
     fill: #4CAF50;
 }
 
-/* Liderlik tablosu ayarları */
-#leaderboard {  
+/* Liderlik Tablosu Stilleri */
+#leaderboard-container {
     position: absolute;
-    top: 10px;  
-    left: 10px;  
-    background-color: #5885af;  
-    padding: 10px;  
-    border: 1px solid #274472;  
-    max-width: 180px;  
-    max-height: 1200px;  
-    overflow-y: auto;  
-    z-index: 1; /* Lider tablosu haritanın üstünde kalmalı */
-    scrollbar-width: thin; /* Firefox için ince kaydırma çubuğu */  
-    scrollbar-color: #274472 #5885af; /* Firefox için kaydırma çubuğu rengi */
-    transition: background-position 0.1s ease; /* Arka planın fare hareketiyle hareket etmesi */
+    top: 45px;
+    left: 5px;
+    background-image: url('den.png'); /* Arka plan görseliniz */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+    max-width: 250px;
+    max-height: 450px;
+    overflow-y: auto;
+    z-index: 1;
+    border-radius: 20px;
+    display: none; /* Başlangıçta gizli */
 }
 
-/* Chrome ve diğer WebKit tabanlı tarayıcılar için kaydırma çubuğu stilleri */  
-#leaderboard::-webkit-scrollbar {  
-    width: 8px; /* Kaydırma çubuğunun genişliği */  
-}  
-
-#leaderboard::-webkit-scrollbar-track {  
-    background: #5885af; /* Kaydırma çubuğu arka planı */  
-}  
-
-#leaderboard::-webkit-scrollbar-thumb {  
-    background-color: #274472; /* Kaydırma çubuğu */  
-    border-radius: 10px; /* Yuvarlatılmış köşeler */  
-}  
-
-#leaderboard::-webkit-scrollbar-thumb:hover {  
-    background-color: #21658c; /* Üzerine gelince rengi değiştir */  
-}
-
-#leaderboard h2 {
-    margin-top: 0;
-    font-size: 18px;
-}
-
-#leaderboard ul {
+#leaderboard-list {
     list-style-type: none;
     padding-left: 0;
+    bottom: 5px;
+    color: #edf2f3;
+    animation: list_kayma 1s ease-in-out forwards; 
+    position: relative;  
+    font-family: "Maiden Orange", serif;
 }
+@keyframes list_kayma {  
+    from {  
+        left: -10; /* Soldan çıkış */  
+        opacity: 0;  /* Başlangıçta görünmez */  
+    }  
+    to {  
+        left: 0px;     /* Normal konuma gelme */  
+        opacity: 1;  /* Görünür hale gelme */  
+    }  
+} 
 
 #leaderboard li {
     margin-bottom: 5px;
     color: #edf2f3;
     font-weight: 100;
-    font-family: "Maiden Orange", serif;
 }
 
-/* Bayrak simgeleri */
+/* Bayrak Simge Stili */
 .flag-icon {
-    width: 25px; 
+    width: 40px;
     height: auto;
+    border: 1px solid #464646; /* Çerçeve kalınlığı, tipi ve rengi */  
+    padding: 1px;             /* İçerik ile çerçeve arasındaki boşluk */  
+    margin: 1px;              /* Çerçevenin çevresindeki boşluk */  
+    border-radius: 10px;      /* Kenar yuvarlama */  
+    background-color: #3b3b3b; /* Arkaplan rengi */  
+    text-align: center; 
 }
 
-/* Video arka planı ayarlama */
+/* Hamburger Menüsü */
+.hamburger {
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 1000;
+    
+}
+.ldtitle {
+    font-size: 30px;
+    top: 8px;
+    z-index: 999;
+    color:#000000;
+    cursor: pointer;
+    position: absolute;
+    display: none;
+    font-family: "Maiden Orange", serif;
+    animation: kayma 0.5s ease-in-out forwards;  
+    position: relative;  
 
-#leaderboard {
-    width: 300px;
-    height: 900px;
-    background-image: url('den.jpeg'); /* Arka plan görseliniz */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    overflow-y: auto;
-    position: relative; /* Eğer tabloyu sabit bir yerde tutmak istiyorsanız */
+}
+
+@keyframes kayma {  
+    from {  
+        left: 0; /* Soldan çıkış */  
+        opacity: 0;  /* Başlangıçta görünmez */  
+    }  
+    to {  
+        left: 50px;     /* Normal konuma gelme */  
+        opacity: 1;  /* Görünür hale gelme */  
+    }  
+} 
+
+/* Liderlik Tablosu için Kaydırma Çubuğu Stili */
+#leaderboard-container::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 25px;
+}
+
+#leaderboard-container::-webkit-scrollbar-track {
+    background: #000000;
+    border-radius: 25px;
+}
+
+#leaderboard-container::-webkit-scrollbar-thumb {
+    background-color: #3d3d3d;
+    border-radius: 25px;
+}
+
+#leaderboard-container::-webkit-scrollbar-thumb:hover {
+    background-color: #000000;
+    border-radius: 25px;
 }
